@@ -1,0 +1,35 @@
+let mapleader = " "
+inoremap jk <Esc>
+set ignorecase
+set clipboard=unnamed
+
+nnoremap gd :vsc Edit.GoToDeclaration<CR>
+nnoremap gi :vsc Edit.GoToImplementation<CR>
+nnoremap gr :vsc Edit.FindAllReferences<CR>
+nnoremap gp :vsc Edit.PeekDefinition<CR>
+nnoremap <leader>r :vsc Refactor.Rename<CR>
+nnoremap <leader>f :vsc Edit.GoToFile<CR>
+nnoremap <leader>s :vsc Edit.SurroundWith<CR>
+nnoremap <leader>u :vsc Edit.GoToReference<CR>
+nnoremap <leader>d :vsc Edit.Duplicate<CR>
+nnoremap <leader>t :vsc Edit.GotoType<CR>
+
+" Jump between compilation errors
+nnoremap <leader>e :vsc View.NextError<CR>
+nnoremap <leader>E :vsc View.PreviousError<CR>
+
+" Testing and debugging
+nnoremap <leader>b :vsc Debug.ToggleBreakpoint<cr>
+
+" Building
+nnoremap <leader>B :vsc Build.BuildSolution<CR>
+
+" Navigate by method
+nnoremap ] :vsc Edit.NextMethod<CR>
+nnoremap [ :vsc Edit.PreviousMethod<CR>
+
+" Utils
+" Add semicolon at the end of the line
+nnoremap <leader>; A;<Esc>
+" Comment line
+nnoremap <leader>/ :vsc Edit.ToggleLineComment<CR>
