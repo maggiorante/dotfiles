@@ -23,7 +23,7 @@ set autoread
 au FocusGained,BufEnter * silent! checktime"
 
 " Set the space  as the leader key.
-let mapleader = " "
+let mapleader=" "
 
 " Mouse functionality
 set mouse=a
@@ -31,6 +31,8 @@ set mouse=a
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set termguicolors
 
 " Add numbers to the file.
 set number
@@ -54,9 +56,6 @@ if has("win16") || has("win32")
 else
 	set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 endif
-
-" Always show current position
-set ruler
 
 " A buffer becomes hidden when it is abandoned
 set hid
@@ -118,10 +117,7 @@ syntax on
 set regexpengine=0
 
 " Color scheme
-try
-	colorscheme slate
-catch
-endtry
+colorscheme slate
 
 set background=dark
 
@@ -185,10 +181,7 @@ let g:netrw_winsize=20
 """"""""""""""""""""""""""""""
 
 " Always show the status line
-"set laststatus=2
-
-" Format the status line
-"set statusline=\ %F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+set laststatus=2
 
 set statusline=
 set statusline+=%7*\[%n]                                  "buffernr
@@ -197,7 +190,7 @@ set statusline+=%2*\ %y\                                  "FileType
 set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
 set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
 set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
-set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "Spellanguage & Highlight on?
+set statusline+=%5*\ %{&spelllang}\ %{HighlightSearch()}\  "Spellanguage & Highlight on?
 set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "Rownumber/total (%)
 set statusline+=%9*\ col:%03c\                            "Colnr
 set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
