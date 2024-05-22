@@ -103,7 +103,6 @@ set splitbelow splitright
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
-set t_vb=
 set tm=500
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -117,7 +116,10 @@ syntax on
 set regexpengine=0
 
 " Color scheme
-colorscheme slate
+try
+    colorscheme slate
+catch
+endtry
 
 set background=dark
 
@@ -153,6 +155,10 @@ set tabstop=4
 
 " If the current file type is HTML, set indentation to 2 spaces.
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
+
+" Linebreak on 500 characters
+set lbr
+set tw=500
 
 set ai "Auto indent
 set si "Smart indent
@@ -247,11 +253,46 @@ noremap <a-down> <c-w>-
 noremap <a-left> <c-w>>
 noremap <a-right> <c-w><
 
-" Moving between tabs
-map <leader>t gt
-
 " Opening\Creating a file in a new tab - write the tab to open
 nnoremap <leader>c :tabedit<space>
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
+
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
+
+map <leader>l :bnext<cr>
+map <leader>h :bprevious<cr>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext<cr>
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <C-r>=escape(expand("%:p:h"), " ")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Specify the behavior when switching between buffers
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc mappings
