@@ -46,7 +46,7 @@ set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-" Turn on wildmenu
+" Turn on wildmenu (vim command line)
 set wildmenu
 
 " Ignore certain files
@@ -278,20 +278,25 @@ map <leader>e :Lex<CR>
 " Opening a file from explorer
 map <leader>o :Explore<CR>
 
-" Closing compaction in insert mode
-inoremap [ []<left>
-inoremap ( ()<left>
-inoremap { {}<left>
-inoremap /* /**/<left><left>
+" Closing companion in insert mode
+" ioremap " ""<left>
+" inoremap ' ''<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O
+" inoremap /* /**/<left><left>
 
-" Surround word with a wanted character
+" Surround word with a wanted character (escape pipe character with \| or <bar>)
 nnoremap <leader>sw <cmd>echo "Press a character: " \| let c = nr2char(getchar()) \| exec "normal viwo\ei" . c . "\eea" . c . "\e" \| redraw<CR>
 
 " Replace all occurrences of a word
 nnoremap <leader>rw :%s/\<<c-r><c-w>\>//g<left><left>
 
 " For copy and past
-map <leader>p "+P
+map <leader>p "+p
+map <leader>P "+P
 vnoremap <c-c> "*y :let @+=@*<CR>
 " If not in Linux replace the keybinding in above line with: vnoremap <C-C> "+y
 
