@@ -127,15 +127,5 @@ nnoremap <C-Right> :vsc Debug.StepOver<CR>
 nnoremap <C-Down> :vsc Debug.StepInto<CR>
 nnoremap <C-Up> :vsc Debug.StepOut<CR>
 
-" `]` - Navigate to the next member / type / tag
-" `[` - Navigate to the previous member / type / tag
-nnoremap ] :vsc Edit.NextMethod<CR>
-nnoremap [ :vsc Edit.PreviousMethod<CR>
-
 " `<leader> + /` - Comment/uncomment the current line
 nnoremap <leader>/ :vsc Edit.ToggleLineComment<CR>
-
-" `<Alt> + <Enter>` - Show action indicators and action list
-" `<Ctrl> + <Space>` - Provide a completion list for partially typed words
-noremap <A-CR> :vsc View.QuickActions<CR>
-noremap <C-Space> :vsc Edit.CompleteWord<CR>
