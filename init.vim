@@ -1,35 +1,27 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Disable compatibility with vi which can cause unexpected issues.
+" Disable compatibility with vi which can cause unexpected issues
 set nocompatible
 
-" Set the commands to save in history default number is 20.
+" Set the commands to save in history default number is 20
 set history=500
 
-" Enable type file detection. Vim will be able to try to detect the type of file is use.
+" Enable type file detection so Vim can try to detect the type of file
 filetype on
-
-" Disable auto commenting in a new line
-autocmd Filetype * setlocal formatoptions-=c formatoptions-=r  formatoptions-=o
 
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
 
-" Set to auto read when a file is changed from the outside
+" Set to autoread when a file is changed from the outside
 set autoread
 au FocusGained,BufEnter * silent! checktime"
 
-" Set the space  as the leader key.
 let mapleader=" "
 
-" Mouse functionality
+" Enable mouse in all modes
 set mouse=a
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set termguicolors
@@ -37,7 +29,7 @@ set termguicolors
 " Add numbers to the file.
 set number
 
-" Set 7 lines to the curssor
+" Set offset lines
 set scrolloff=7
 
 " Avoid garbled characters in Chinese language windows OS
@@ -46,10 +38,10 @@ set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
-" Turn on wildmenu (vim command line)
+" Turn on wildmenu (command line completion)
 set wildmenu
 
-" Ignore certain files
+" Ignore certain files in wildmenu
 set wildignore=*.o,*~,*.pyc,*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 if has("win16") || has("win32")
 	set wildignore+=.git\*,.hg\*,.svn\*
@@ -64,13 +56,11 @@ set hid
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
-" Ignore case when searching
-set ignorecase
-
 " When searching try to be smart about cases
+set ignorecase
 set smartcase
 
-" While searching through a file incrementally highlight matching characters as you type.
+" While searching through a file incrementally highlight matching characters as you type
 set incsearch
 set hlsearch
 
@@ -80,24 +70,23 @@ set lazyredraw
 " For regular expressions turn magic on
 set magic
 
-" Show matching words during a search.
+" Show matching words during a search
 set showmatch
+
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
-" Highlight cursor line underneath the cursor horizontally.
+" Highlight line and column underneath the cursor
 set cursorline
-
-" Highlight cursor line underneath the cursor vertically.
 set cursorcolumn
 
-" Show partial command you type in the last line of the screen.
+" Show partial command you type in the last line of the screen
 set showcmd
 
 " Show the mode you are on the last line.
 set showmode
 
-" Setting the split window to open as i like (like in a WM - qtile)
+" Setting the split window to open as in a WM - qtile
 set splitbelow splitright
 
 " No annoying sound on errors
@@ -105,8 +94,6 @@ set noerrorbells
 set novisualbell
 set tm=500
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Turn syntax highlighting on.
@@ -131,8 +118,6 @@ set fileencoding=utf-8
 set ffs=unix,dos,mac
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Turn backup off, since most stuff is in SVN, git etc. anyway...
 set nobackup
@@ -140,51 +125,30 @@ set nowb
 set noswapfile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Use spaces instead of tabs
 set expandtab
-
-" Be smart when using tabs ;)
 set smarttab
-
-" 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
 
-" If the current file type is HTML, set indentation to 2 spaces.
+" If the current file type is HTML, set indentation to 2 spaces
 autocmd Filetype html setlocal tabstop=2 shiftwidth=2 expandtab
 
 " Linebreak on 500 characters
 set lbr
 set tw=500
 
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
+" Auto indent
+set ai
+" Smart indent
+set si
+" Wrap lines
+set wrap
 
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :<c-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<c-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
-
-""""""""""""""""""""""""""""""
-" => File browser
-""""""""""""""""""""""""""""""
-
-" Search down to subfolders
-set path+=**
-
-" File Browsing settings
-let g:netrw_banner=0
-let g:netrw_liststyle=3
-let g:netrw_showhide=1
-let g:netrw_winsize=20
-
-""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Status line
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Always show the status line
 set laststatus=2
@@ -212,76 +176,61 @@ hi User9 guifg=#ffffff  guibg=#810085
 hi User0 guifg=#ffffff  guibg=#094afe
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Spell checking
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
-
-" Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Opening a terminal window
-map <c-t> :ter<CR>
-" Closing the terminal window
-tnoremap <c-t> exit<CR>
-" CTRL+I OR Esc to make the terminal scrollable and I to input mode
-tnoremap <c-i> <c-w><s-n> 
-tnoremap <esc> <c-\><c-n>
-
-" You can split the window in Vim. y - in the y access , x - in the x access
+" leader + s(plit) + x -> Split y axis (horizontally)
+" leader + s(plit) + y -> Split x axis (vertically)
 map <leader>y :split<space>
 map <leader>x :vsplit<space>
 
-" Navigate the split view easier by pressing CTRL+j, CTRL+k, CTRL+h, or CTRL+l.
+" ctrl + j -> Navigate window down
+" ctrl + k -> Navigate window up
+" ctrl + h -> Navigate window left
+" ctrl + l -> Navigate window right
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-" Resize split windows using arrow keys by pressing:
-" ALT+UP, ALT+DOWN, ALT+LEFT, or ALT+RIGHT.
-noremap <a-up> <c-w>+
-noremap <a-down> <c-w>-
-noremap <a-left> <c-w>>
-noremap <a-right> <c-w><
+" ctrl + i -> Increase current window height
+" ctrl + o -> Decrease current window height
+" ctrl + u -> Increase current window width
+" ctrl + p -> Decrease current window width
+noremap <c-i> <c-w>+
+noremap <c-o> <c-w>-
+noremap <c-u> <c-w>>
+noremap <c-p> <c-w><
 
-" Opening\Creating a file in a new tab - write the tab to open
-nnoremap <leader>c :tabedit<space>
+" leader + c(reate) + t(ab) -> Open/Create file in new tab
+nnoremap <leader>ct :tabedit<space>
 
-" Close the current buffer
+" leader + b(uffer) + d(delete) -> Close current buffer
+" leader + b(uffer) + A(ll) -> Close all buffers
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
+map <leader>bA :bufdo bd<cr>
 
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
+" leader + b(uffer) + j -> Next buffer
+" leader + b(uffer) + k -> Previous buffer
+map <leader>bj :bnext<cr>
+map <leader>bk :bprevious<cr>
 
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
-
-" Useful mappings for managing tabs
+" leader + t(ab) + n(ew) -> Open new tab
+" leader + t(ab) + o(open) -> Close all other tabs
+" leader + t(ab) + c(close) -> Close current tab
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext<cr>
 
-" Let 'tl' toggle between this and the last accessed tab
+" alt + h -> Navigate previous tab
+" alt + l -> Navigate next tab
+map <a-h> :tabprevious<cr>
+map <a-l> :tabnext<cr>
+
+" leader + t(ab) + l(ast) -> Toggle between current tab and last accessed tab
 let g:lasttab = 1
 nmap <leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <C-r>=escape(expand("%:p:h"), " ")<cr>/
-
-" Switch CWD to the directory of the open buffer
+" leader + c(hange) + d(irectory) -> Change CWD of the directory of the opened buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Specify the behavior when switching between buffers
@@ -291,57 +240,24 @@ try
 catch
 endtry
 
-" Return to last edit position when opening files (You want this!)
+" Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Misc mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" leader + A(ll) -> Select all text
+nnoremap <leader>A ggVG
 
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
-" Fast saving
-nmap <leader>w :w!<cr>
-
-" Select all the text
-nnoremap <leader>a ggVG
-
-" Type jj to exit insert mode quickly.
+" j + k -> Esc
 inoremap jk <esc>
 
-" Format a paragraph into lines
-map Q gq<CR>
-
-" Opening a file explore 
+" leader + e(xplore) -> Open a file explorer
+" leader + o(open) -> Open a file from the explorer
 map <leader>e :Lex<CR>
-
-" Opening a file from explorer
 map <leader>o :Explore<CR>
 
-" Closing companion in insert mode
-" ioremap " ""<left>
-" inoremap ' ''<left>
-" inoremap ( ()<left>
-" inoremap [ []<left>
-" inoremap { {}<left>
-" inoremap {<CR> {<CR>}<ESC>O
-" inoremap {;<CR> {<CR>};<ESC>O
-" inoremap /* /**/<left><left>
-
-" Surround word with a wanted character (escape pipe character with \| or <bar>)
-nnoremap <leader>sw <cmd>echo "Press a character: " \| let c = nr2char(getchar()) \| exec "normal viwo\ei" . c . "\eea" . c . "\e" \| redraw<CR>
-
-" Replace all occurrences of a word
+" leader + r(replace) + w(ord) -> Replace all occurences of a word
 nnoremap <leader>rw :%s/\<<c-r><c-w>\>//g<left><left>
 
-" For copy and past
-map <leader>p "+p
-map <leader>P "+P
-vnoremap <c-c> "*y :let @+=@*<CR>
-" If not in Linux replace the keybinding in above line with: vnoremap <C-C> "+y
-
-" Seeing the registers
+" leader + r(egisters) -> View registers
 nnoremap <leader>r <cmd>registers<CR>
 
 " Moving lines in visual mode
@@ -349,25 +265,8 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '>-2<CR>gv=gv
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
+" Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
 
 function! HighlightSearch()
   if &hls
