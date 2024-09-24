@@ -1,8 +1,3 @@
-set scrolloff=10
-set linenumber
-set showmode
-set showcmd
-set visualbell
 set ignorecase
 set smartcase
 set hlsearch
@@ -19,46 +14,122 @@ set ttimeoutlen=50
 " Set the leader key
 let mapleader = " "
 
-" Remap jk to Esc
+" Remap jk to `Esc`
 inoremap jk <Esc>
 
 " Unbinds the Space key as it's used as the leader key
 nnoremap <Space> <NOP>
 
-" Esc removes search highlights
+" `Esc` - Remove search highlights
 nnoremap <Esc> :nohl<CR>
 
-" `<Alt> + j` - Navigate to the next tab
-" `<Alt> + k` - Navigate to the previous tab
-nnoremap <a-k> :tabnext<CR>
-nnoremap <a-j> :tabprev<CR>
+" `=` - Reformat code in the selected scope
+noremap = :vsc Edit.FormatSelection<CR>
+
+" `<leader> + w(indow) + p(in)` - Toggle the pin status of the document
+" `<leader> + w(indows) + c(lose) + a(ll)` - Close all unpinned documents
+noremap <leader>wp :vsc Window.PinTab<CR>
+noremap <leader>wca :vsc Window.CloseAllButPinned<CR>
+
+" `<Alt> + k` - Navigate to the next tab
+" `<Alt> + j` - Navigate to the previous tab
+" You might want to change these if you prefer horizontal tabs loayout
+noremap <A-k> :vsc Window.NextTab<CR>
+noremap <A-j> :vsc Window.PreviousTab<CR>
+
+" `<Alt> + <Enter>` - Show action indicators and action list
+" `<Ctrl> + <Space>` - Provide a completion list for partially typed words
+noremap <A-CR> :vsc View.QuickActions<CR>
+noremap <C-Space> :vsc Edit.CompleteWord<CR>
+
+" `<leader> + r(emove) + s(ort)` - Remove and sort 'usings'
+noremap <leader>rs :vsc Edit.RemoveAndSort<CR>
 
 " `]` - Navigate to the next member / type / tag
 " `[` - Navigate to the previous member / type / tag
-nnoremap [ <Action>(MethodUp)
-nnoremap ] <Action>(MethodDown)
+noremap ] :vsc Edit.NextMethod<CR>
+noremap [ :vsc Edit.PreviousMethod<CR>
 
-map <leader>/ <Action>(CommentByLineComment)
-map <leader>rs <Action>(ReformatCode)
+" `<Ctrl> + h` - Move backward through navigation history
+" `<Ctrl> + l` - Move forward through navigation history
+noremap <C-h> :vsc View.NavigateBackward<CR>
+noremap <C-l> :vsc View.NavigateForward<CR>
 
-map <leader>rc :action CollapseAllRegions<CR>
-map <leader>re :action ExpandAllRegions<CR>
+" Improves navigation when wrapping
+" by swapping `j` with `gj` and `k` with `gk`
+nnoremap j gj
+nnoremap gj j
+nnoremap k gk
+nnoremap gk k
 
-map g// <Action>(SearchEverywhere)
+" A declaration introduces an identifier and describes its type, be it a type, object, or function. A declaration is what the compiler needs to accept references to that identifier.
+" A definition actually instantiates/implements this identifier. It's what the linker needs in order to link references to those entities.
+" A definition can be used in the place of a declaration.
+" Not really a difference in Visual Studio.
 
-map cd <Action>(RenameElement)
+" `g + D(eclaration)` - Navigate to a declaration of a symbol
+" `g + d(efinition)` - Navigate to a definition of a symbol
+" `g + i(mplementation)` - Navigate to implementation of a type or a type member
+" `g + A(all references)` - Find usages of any symbol from the solution and referenced assemblies
+" `c + d(definition)` - Rename (change definition)
+" `r + c(ollapse)` - Collapse current region
+" `r + e(xpand)` - Expand current region
+nnoremap gD :vsc Edit.GoToDeclaration<CR>
+nnoremap gd :vsc Edit.GoToDefinition<CR>
+nnoremap gi :vsc Edit.GoToImplementation<CR>
+nnoremap gA :vsc Edit.FindAllReferences<CR>
+nnoremap cd :vsc Refactor.Rename<CR>
+nnoremap rc :vsc Edit.CollapseCurrentRegion<CR>
+nnoremap re :vsc Edit.ExpandCurrentRegion<CR>
 
-" Go to code
-nmap gd <Action>(GotoDeclaration)
-nmap gD <Action>(GotoTypeDeclaration)
-nmap gi <Action>(GotoImplementation)
-nmap gA <Action>(ShowUsages)
-nmap <c-h> <Action>(Back)
-nmap <c-l> <Action>(Forward)
+" `g + e(rror)` - Navigate forwards through all issues detected in the current file
+" `g + E(rror)` - Navigate backwards through all issues detected in the current file
+nnoremap ge :vsc View.NextError<CR>
+nnoremap gE :vsc View.PreviousError<CR>
 
-" Errors
-map ge <Action>(ReSharperGotoNextErrorInSolution)
-map gE <Action>(ReSharperGotoPrevErrorInSolution)
+" <g + //> - Find in all files
+" <g + /> - Find in current file
+nnoremap g// :vsc Edit.FindInFiles<CR>
+nnoremap g/ :vsc Edit.Find<CR>
 
-" Debug
-map <leader>sd <Action>(Debug)
+" `<leader> + b + b(reakpoint)` - Toggle a breakpoint at the current line
+" `<leader> + b(reakpoints) + d(isable)` - Disable all breakpoins
+" `<leader> + b(reakpoints) + e(nable)` - Enable all breakpoints
+" `<leader> + b(reakpoints) + r(emove)` - Remove all breakpoints
+" `<leader> + b(reakpoints) + a(ll)` - Show the breakpoints list
+noremap <leader>bb :vsc Debug.ToggleBreakpoint<CR>
+noremap <leader>bd :vsc Debug.DisableAllBreakpoints<CR>
+noremap <leader>be :vsc Debug.EnableAllBreakpoints<CR>
+noremap <leader>br :vsc Debug.DeleteAllBreakpoints<CR>
+noremap <leader>ba :vsc Debug.Breakpoints<CR>
+
+" `<leader> + s(tart) + b(uild)` - Build the solution
+" `<leader> + s(tart) + c(lean)` - Clean the solution
+" `<leader> + s(tart) + b(uild)` + s(election) - Build the project that is currently selected
+" `<leader> + s(tart) + c(lean)` + s(election) - Clean the project that is currently selected
+" `<leader> + s(tart) + d(ebug)` - Start with debugging
+" `<leader> + s(tart) + r(un)` - Run without debugging
+" `<leader> + s(tarted) + b(uild) + c(ancel)` - Cancel the build
+" `<leader> + s(tarted) + d(ebug) + c(ancel)` - Stop debugging
+noremap <leader>sb :vsc Build.BuildSolution<CR>
+noremap <leader>sc :vsc Build.CleanSolution<CR>
+noremap <leader>sbs :vsc Build.BuildSelection<CR>
+noremap <leader>scs :vsc Build.CleanSelection<CR>
+noremap <leader>sd :vsc Debug.Start<CR>
+noremap <leader>sr :vsc Debug.StartWithoutDebugging<CR>
+noremap <leader>sbc :vsc Build.Cancel<CR>
+noremap <leader>sdc :vsc Debug.StopDebugging<CR>
+
+" `<leader> + q(uick) + w(atch)` - Show the QuickWatch dialog box
+" `<Ctrl> + <Left>` - Move execution pointer to the selected statement
+" `<Ctrl> + <Right>` - Step over
+" `<Ctrl> + <Down>` - Step into
+" `<Ctrl> + <Up>` - Step out
+nnoremap <Leader>qw :vsc Debug.QuickWatch<CR>
+nnoremap <C-Left> :vsc Debug.SetNextStatement<CR>
+nnoremap <C-Right> :vsc Debug.StepOver<CR>
+nnoremap <C-Down> :vsc Debug.StepInto<CR>
+nnoremap <C-Up> :vsc Debug.StepOut<CR>
+
+" `<leader> + /` - Comment/uncomment the current line
+nnoremap <leader>/ :vsc Edit.ToggleLineComment<CR>
