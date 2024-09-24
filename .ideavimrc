@@ -1,231 +1,64 @@
-"" .ideavimrc - Matt Chapman
-
-
-"" Base Settings
-"" ========================================================
-
 set scrolloff=10
 set linenumber
 set showmode
 set showcmd
-
-set smartcase
-set incsearch
-set hlsearch
-
 set visualbell
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set number
+set autoindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set clipboard=unnamed
+set ttimeout
+set ttimeoutlen=50
 
-" Use system clipboard
-set clipboard+=unnamed
-
-"" Allow access to original y and p operations with leader key, e.g. to use registers
-"" nnoremap <leader>yy "+yy
-"" vnoremap <leader>y "+y
-"" nnoremap <leader>p "+p
-"" vnoremap <leader>p "+p
-"" nnoremap <leader>P "+P
-"" vnoremap <leader>P "+P
-"" Allow to cut to system clipboard by using leader key with d
-"" nnoremap <leader>dd "+dd
-"" vnoremap <leader>d "+d
-
+" Set the leader key
 let mapleader = " "
 
-
-"" Plugin Settings
-"" ========================================================
-
-set surround
-set highlightedyank
-set sneak
-set nerdtree
-
-" Easymotion settings
-set easymotion
-set notimeout
-
-" Which-key settings
-set which-key
-let g:WhichKey_FontSize = 16
-let g:WhichKey_CommandColor = "#41ead4"
-let g:WhichKey_PrefixColor = "#f335b2"
-let g:WhichKey_SortOrder = "by_key_prefix_first"
-
-let g:WhichKeyDesc_leader = "<leader> Leader key"
-
-let g:WhichKeyDesc_leader = "<leader>x Open file explorer"
-
-let g:WhichKeyDesc_easymotion = "<leader>j Jump with Easymotion"
-let g:WhichKeyDesc_easymotion_prefix = "<leader><leader>"
-
-let g:WhichKeyDesc_code = "<leader>c Code actions"
-let g:WhichKeyDesc_code_comment = "<leader>cc Comment line"
-let g:WhichKeyDesc_code_reformat = "<leader>cr Reformat code"
-
-let g:WhichKeyDesc_fold = "<leader>z Folding"
-let g:WhichKeyDesc_fold_all = "<leader>zc Fold all regions"
-let g:WhichKeyDesc_unfold_all = "<leader>zo Unfold all regions"
-
-let g:WhichKeyDesc_window = "<leader>w Window splits"
-let g:WhichKeyDesc_window_split_vertically = "<leader>wv Split vertically"
-let g:WhichKeyDesc_window_split_horizontally = "<leader>wh Split horizontally"
-let g:WhichKeyDesc_window_split_unsplit = "<leader>wu Unsplit"
-let g:WhichKeyDesc_window_split_move_editor = "<leader>wMove editor to opposite tab group"
-
-
-let g:WhichKeyDesc_look = "<leader>l Viewing options"
-let g:WhichKeyDesc_look_zen_mode = "<leader>lz Toggle Zen mode"
-let g:WhichKeyDesc_look_df_mode = "<leader>ld Toggle Distraction-Free mode"
-let g:WhichKeyDesc_look_fullscreen = "<leader>lf Toggle full screen"
-
-let g:WhichKeyDesc_action= "<leader>a Actions"
-let g:WhichKeyDesc_action_context_menu = "<leader>am Open context menu"
-let g:WhichKeyDesc_action_search = "<leader>as Open command modal"
-
-let g:WhichKeyDesc_file_quickLook = "<leader><leader> Recent files"
-
-let g:WhichKeyDesc_file_nav = "<leader>f File navigation"
-let g:WhichKeyDesc_file_nav_goto_file = "<leader>ff Go to file"
-let g:WhichKeyDesc_file_nav_goto_content = "<leader>fc Search for file content"
-let g:WhichKeyDesc_file_nav_show_recent_files = "<leader>fr Show recent files"
-let g:WhichKeyDesc_file_nav_show_recent_locations = "<leader>fl Show recent locations"
-
-let g:WhichKeyDesc_close_tab = "<leader>q Close active tab"
-
-let g:WhichKeyDesc_refactoring = "<leader>r Refactoring menu"
-let g:WhichKeyDesc_refactoring_rename = "<leader>rn Rename element"
-let g:WhichKeyDesc_refactoring_method = "<leader>rm Extract method"
-let g:WhichKeyDesc_refactoring_variable = "<leader>rv Introduce variable"
-let g:WhichKeyDesc_refactoring_field = "<leader>rf Introduce field"
-let g:WhichKeyDesc_refactoring_signature = "<leader>rs Change signature"
-let g:WhichKeyDesc_refactoring_all = "<leader>rr Open refactorings list"
-
-let g:WhichKeyDesc_goto = "<leader>g Go to X"
-let g:WhichKeyDesc_goto_declaration = "<leader>gd Go to Definition"
-let g:WhichKeyDesc_goto_type_declaration = "<leader>gy Go to Type Definition"
-let g:WhichKeyDesc_goto_implementation = "<leader>gi Go to Implementation"
-let g:WhichKeyDesc_goto_usages = "<leader>gu Go to Usages"
-let g:WhichKeyDesc_goto_test = "<leader>gt Go to Test"
-let g:WhichKeyDesc_goto_back = "<leader>gb Go Back"
-let g:WhichKeyDesc_goto_forward = "<leader>gf Go Forward"
-
-let g:WhichKeyDesc_versioning = "<leader>v Git operations"
-let g:WhichKeyDesc_versioning_commit = "<leader>vc Open Git commit dialog"
-let g:WhichKeyDesc_versioning_status = "<leader>vs Open Git status dialog"
-let g:WhichKeyDesc_versioning_branches = "<leader>vb Open Git branches list"
-
-let g:WhichKeyDesc_errors = "<leader>e Error navigation"
-let g:WhichKeyDesc_errors_next = "<leader>en Go to next error in solution"
-let g:WhichKeyDesc_errors_prev = "<leader>ep Go to previous error in solution"
-
-let g:WhichKeyDesc_debug = "<leader>d Debugging"
-let g:WhichKeyDesc_debug_debug = "<leader>dd Start debugging"
-let g:WhichKeyDesc_debug_breakpoint = "<leader>db Add breakpoint"
-
-
-"" Key mappings
-"" ========================================================
-
+" Remap jk to Esc
 inoremap jk <Esc>
 
-" Tab navigation
-nnoremap <A-n> :tabnext<CR>
-nnoremap <A-p> :tabprev<CR>
+" Unbinds the Space key as it's used as the leader key
+nnoremap <Space> <NOP>
 
-" Pane navigation
-nnoremap <A-h> <C-w>h
-nnoremap <A-l> <C-w>l
-nnoremap <A-k> <C-w>k
-nnoremap <A-j> <C-w>j
+" Esc removes search highlights
+nnoremap <Esc> :nohl<CR>
 
-" Jump between methods
-nnoremap [[ <Action>(MethodUp)
-nnoremap ]] <Action>(MethodDown)
+" `<Alt> + j` - Navigate to the next tab
+" `<Alt> + k` - Navigate to the previous tab
+nnoremap <a-k> :tabnext<CR>
+nnoremap <a-j> :tabprev<CR>
 
-" Easy visual indentation
-vnoremap < <gv
-vnoremap > >gv
+" `]` - Navigate to the next member / type / tag
+" `[` - Navigate to the previous member / type / tag
+nnoremap [ <Action>(MethodUp)
+nnoremap ] <Action>(MethodDown)
 
-" Execute macro saved in 'q' register
-nnoremap qj @q
+map <leader>/ <Action>(CommentByLineComment)
+map <leader>rs <Action>(ReformatCode)
 
-" Popup navigation
-inoremap <C-j> <Action>(PopupMenu-selectNext)
-inoremap <C-k> <Action>(PopupMenu-selectPrev)
+map <leader>rc :action CollapseAllRegions<CR>
+map <leader>re :action ExpandAllRegions<CR>
 
+map g// <Action>(SearchEverywhere)
 
-"" Leader commands
-"" ========================================================
-
-" Code
-map <leader>cc <Action>(CommentByLineComment)
-map <leader>cr <Action>(ReformatCode)
-
-" Jump around with easymotion
-map <leader>j <Plug>(easymotion-s)
-
-" Open NERDTree (use q to exit)
-map <leader>x :NERDTreeToggle<CR>
-
-" Folding
-map <leader>zc :action CollapseAllRegions<CR>
-map <leader>zo :action ExpandAllRegions<CR>
-
-" Window splits
-map <leader>wv <Action>(SplitVertically)
-map <leader>ws <Action>(SplitHorizontally)
-map <leader>wu <Action>(Unsplit)
-map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
-
-" Viewing options
-map <leader>ld <Action>(ToggleDistractionFreeMode)
-map <leader>lz <Action>(ToggleZenMode)
-map <leader>lf <Action>(ToggleFullScreen)
-
-" Actions
-map <leader>am <Action>(ShowIntentionActions)
-map <leader>as <Action>(SearchEverywhere)
-
-" File navigation
-map <leader>ff <Action>(GotoFile)
-map <leader>fr <Action>(RecentFiles)
-map <leader>fc <Action>(FindInPath)
-map <leader><leader> <Action>(RecentFiles)
-map <leader>fl <Action>(RecentLocations)
-map <leader>fs <Action>(NewScratchFile)
-
-" Close active tab
-map <leader>q <Action>(CloseContent)
-
-" Refactoring
-map <leader>rn <Action>(RenameElement)
-map <leader>rm <Action>(ExtractMethod)
-map <leader>rv <Action>(IntroduceVariable)
-map <leader>rf <Action>(IntroduceField)
-map <leader>rs <Action>(ChangeSignature)
-map <leader>rr <Action>(Refactorings.QuickListPopupAction)
+map cd <Action>(RenameElement)
 
 " Go to code
-nmap <leader>gd <Action>(GotoDeclaration)
-nmap <leader>gy <Action>(GotoTypeDeclaration)
-nmap <leader>gi <Action>(GotoImplementation)
-nmap <leader>gu <Action>(ShowUsages)
-nmap <leader>gt <Action>(GotoTest)
-nmap <leader>gf <Action>(Back)
-nmap <leader>gb <Action>(Forward)
-
-" Git windows
-map <leader>vc <Action>(CheckinProject)
-map <leader>vs <Action>(ActivateVersionControlToolWindow)
-map <leader>vb <Action>(Git.Branches)
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoTypeDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gA <Action>(ShowUsages)
+nmap <c-h> <Action>(Back)
+nmap <c-l> <Action>(Forward)
 
 " Errors
-map <leader>en <Action>(ReSharperGotoNextErrorInSolution)
-map <leader>ep <Action>(ReSharperGotoPrevErrorInSolution)
+map ge <Action>(ReSharperGotoNextErrorInSolution)
+map gE <Action>(ReSharperGotoPrevErrorInSolution)
 
 " Debug
-map <leader>dd <Action>(Debug)
-map <leader>db <Action>(ToggleLineBreakpoint)
-
-"" Don't use Ex mode, use Q for formatting.
-"" map Q gq
+map <leader>sd <Action>(Debug)
