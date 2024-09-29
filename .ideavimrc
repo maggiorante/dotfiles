@@ -47,7 +47,7 @@ nmap <A-CR> <Action>(QuickActions)
 nmap <C-Space> <Action>(EditorCompleteStatement)
 
 " `<leader> + r(emove) + s(ort)` - Remove and sort 'usings'
-nmap <leader>rs <Action>(ReformatCode)
+nmap <leader>rs <Action>(OptimizeImports)
 
 " `]` - Navigate to the next member / type / tag
 " `[` - Navigate to the previous member / type / tag
