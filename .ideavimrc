@@ -12,53 +12,103 @@ set autoindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set clipboard=unnamed
+set clipboard+=unnamed
 set ttimeout
 set ttimeoutlen=50
 
 " Set the leader key
 let mapleader = " "
 
-" Remap jk to Esc
+" Remap jk to `Esc`
 inoremap jk <Esc>
 
 " Unbinds the Space key as it's used as the leader key
 nnoremap <Space> <NOP>
 
-" Esc removes search highlights
+" `Esc` removes search highlights
 nnoremap <Esc> :nohl<CR>
+
+" `=` - Reformat code in the selected scope
+noremap = <Action>(ReformatCode)
+
+" `<leader> + w(indow) + p(in)` - Toggle the pin status of the document
+" `<leader> + w(indows) + c(lose) + a(ll)` - Close all unpinned documents
+noremap <leader>wp <Action>(PinActiveTabToggle)
+noremap <leader>wca <Action>(CloseAllUnpinnedEditors)
 
 " `<Alt> + j` - Navigate to the next tab
 " `<Alt> + k` - Navigate to the previous tab
-nnoremap <a-k> :tabnext<CR>
-nnoremap <a-j> :tabprev<CR>
+nnoremap <A-k> <Action>(NextTab)
+nnoremap <A-j> <Action>(PreviousTab)
+
+" `<Alt> + <Enter>` - Show action indicators and action list
+" `<Ctrl> + <Space>` - Provide a completion list for partially typed words
+noremap <A-CR> <Action>(QuickActions)
+noremap <C-Space> <Action>(EditorCompleteStatement)
+
+" `<leader> + r(emove) + s(ort)` - Remove and sort 'usings'
+map <leader>rs <Action>(ReformatCode)
 
 " `]` - Navigate to the next member / type / tag
 " `[` - Navigate to the previous member / type / tag
 nnoremap [ <Action>(MethodUp)
 nnoremap ] <Action>(MethodDown)
 
-map <leader>/ <Action>(CommentByLineComment)
-map <leader>rs <Action>(ReformatCode)
+" `<Ctrl> + h` - Move backward through navigation history
+" `<Ctrl> + l` - Move forward through navigation history
+noremap <C-h> <Action>(Back)
+noremap <C-l> <Action>(Forward)
 
-map <leader>rc :action CollapseAllRegions<CR>
-map <leader>re :action ExpandAllRegions<CR>
+" Improves navigation when wrapping
+" by swapping `j` with `gj` and `k` with `gk`
+nnoremap j gj
+nnoremap gj j
+nnoremap k gk
+nnoremap gk k
 
-map g// <Action>(SearchEverywhere)
+" A declaration introduces an identifier and describes its type, be it a type, object, or function. A declaration is what the compiler needs to accept references to that identifier.
+" A definition actually instantiates/implements this identifier. It's what the linker needs in order to link references to those entities.
+" A definition can be used in the place of a declaration.
+" Not really a difference in Visual Studio.
 
-map cd <Action>(RenameElement)
 
-" Go to code
-nmap gd <Action>(GotoDeclaration)
+" `g + D(eclaration)` - Navigate to a declaration of a symbol
+" `g + d(efinition)` - Navigate to a definition of a symbol
+" `g + i(mplementation)` - Navigate to implementation of a type or a type member
+" `g + A(all references)` - Find usages of any symbol from the solution and referenced assemblies
+" `c + d(definition)` - Rename (change definition)
+" `r + c(ollapse)` - Collapse current region
+" `r + e(xpand)` - Expand current region
 nmap gD <Action>(GotoTypeDeclaration)
+nmap gd <Action>(GotoDeclaration)
 nmap gi <Action>(GotoImplementation)
 nmap gA <Action>(ShowUsages)
-nmap <c-h> <Action>(Back)
-nmap <c-l> <Action>(Forward)
+map cd <Action>(RenameElement)
+map <leader>rc <Action>(CollapseRegion)
+map <leader>re <Action>(ExpandRegion)
 
-" Errors
+" `g + e(rror)` - Navigate forwards through all issues detected in the current file
+" `g + E(rror)` - Navigate backwards through all issues detected in the current file
 map ge <Action>(ReSharperGotoNextErrorInSolution)
 map gE <Action>(ReSharperGotoPrevErrorInSolution)
 
-" Debug
-map <leader>sd <Action>(Debug)
+
+" <g + //> - Find in all files
+" <g + /> - Find in current file
+nnoremap g// <Action>(SearchEverywhere)
+nnoremap g/ <Action>(Find)
+
+" `<leader> + b + b(reakpoint)` - Toggle a breakpoint at the current line
+" `<leader> + b(reakpoints) + d(isable)` - Disable all breakpoins
+" `<leader> + b(reakpoints) + e(nable)` - Enable all breakpoints
+" `<leader> + b(reakpoints) + r(emove)` - Remove all breakpoints
+" `<leader> + b(reakpoints) + a(ll)` - Show the breakpoints list
+noremap <leader>bb <Action>(ToggleLineBreakpoint)
+noremap <leader>br <Action>(Debugger.RemoveAllBreakpoints)
+noremap <leader>ba <Action>(ViewBreakpoints)
+
+" `<leader> + s(tart) + d(ebug)` - Start with debugging
+noremap <leader>sd <Action>(Debug)
+
+" `<leader> + /` - Comment/uncomment the current line
+map <leader>/ <Action>(CommentByLineComment)
