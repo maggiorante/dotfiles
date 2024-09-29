@@ -26,38 +26,38 @@ inoremap jk <Esc>
 nnoremap <Space> <NOP>
 
 " `Esc` removes search highlights
-nnoremap <Esc> :nohl<CR>
+nmap <Esc> :nohl<CR>
 
 " `=` - Reformat code in the selected scope
-noremap = <Action>(ReformatCode)
+nmap = <Action>(ReformatCode)
 
 " `<leader> + w(indow) + p(in)` - Toggle the pin status of the document
 " `<leader> + w(indows) + c(lose) + a(ll)` - Close all unpinned documents
-noremap <leader>wp <Action>(PinActiveTabToggle)
-noremap <leader>wca <Action>(CloseAllUnpinnedEditors)
+nmap <leader>wp <Action>(PinActiveTabToggle)
+nmap <leader>wca <Action>(CloseAllUnpinnedEditors)
 
 " `<Alt> + j` - Navigate to the next tab
 " `<Alt> + k` - Navigate to the previous tab
-nnoremap <A-k> <Action>(NextTab)
-nnoremap <A-j> <Action>(PreviousTab)
+nmap <A-k> <Action>(NextTab)
+nmap <A-j> <Action>(PreviousTab)
 
 " `<Alt> + <Enter>` - Show action indicators and action list
 " `<Ctrl> + <Space>` - Provide a completion list for partially typed words
-noremap <A-CR> <Action>(QuickActions)
-noremap <C-Space> <Action>(EditorCompleteStatement)
+nmap <A-CR> <Action>(QuickActions)
+nmap <C-Space> <Action>(EditorCompleteStatement)
 
 " `<leader> + r(emove) + s(ort)` - Remove and sort 'usings'
-map <leader>rs <Action>(ReformatCode)
+nmap <leader>rs <Action>(ReformatCode)
 
 " `]` - Navigate to the next member / type / tag
 " `[` - Navigate to the previous member / type / tag
-nnoremap [ <Action>(MethodUp)
-nnoremap ] <Action>(MethodDown)
+nmap [ <Action>(MethodUp)
+nmap ] <Action>(MethodDown)
 
 " `<Ctrl> + h` - Move backward through navigation history
 " `<Ctrl> + l` - Move forward through navigation history
-noremap <C-h> <Action>(Back)
-noremap <C-l> <Action>(Forward)
+nmap <C-h> <Action>(Back)
+nmap <C-l> <Action>(Forward)
 
 " Improves navigation when wrapping
 " by swapping `j` with `gj` and `k` with `gk`
@@ -83,32 +83,32 @@ nmap gD <Action>(GotoTypeDeclaration)
 nmap gd <Action>(GotoDeclaration)
 nmap gi <Action>(GotoImplementation)
 nmap gA <Action>(ShowUsages)
-map cd <Action>(RenameElement)
-map <leader>rc <Action>(CollapseRegion)
-map <leader>re <Action>(ExpandRegion)
+nmap cd <Action>(RenameElement)
+nmap <leader>rc <Action>(CollapseRegion)
+nmap <leader>re <Action>(ExpandRegion)
 
 " `g + e(rror)` - Navigate forwards through all issues detected in the current file
 " `g + E(rror)` - Navigate backwards through all issues detected in the current file
-map ge <Action>(GotoNextError)
-map gE <Action>(GotoPrevError)
+nmap ge <Action>(GotoNextError)
+nmap gE <Action>(GotoPreviousError)
 
 
 " <g + //> - Find in all files
 " <g + /> - Find in current file
-nnoremap g// <Action>(SearchEverywhere)
-nnoremap g/ <Action>(Find)
+nmap g// <Action>(SearchEverywhere)
+nmap g/ <Action>(Find)
 
 " `<leader> + b + b(reakpoint)` - Toggle a breakpoint at the current line
 " `<leader> + b(reakpoints) + d(isable)` - Disable all breakpoins
 " `<leader> + b(reakpoints) + e(nable)` - Enable all breakpoints
 " `<leader> + b(reakpoints) + r(emove)` - Remove all breakpoints
 " `<leader> + b(reakpoints) + a(ll)` - Show the breakpoints list
-noremap <leader>bb <Action>(ToggleLineBreakpoint)
-noremap <leader>br <Action>(Debugger.RemoveAllBreakpoints)
-noremap <leader>ba <Action>(ViewBreakpoints)
+nmap <leader>bb <Action>(ToggleLineBreakpoint)
+nmap <leader>br <Action>(Debugger.RemoveAllBreakpoints)
+nmap <leader>ba <Action>(ViewBreakpoints)
 
 " `<leader> + s(tart) + d(ebug)` - Start with debugging
-noremap <leader>sd <Action>(Debug)
+nmap <leader>sd <Action>(Debug)
 
 " `<leader> + /` - Comment/uncomment the current line
-map <leader>/ <Action>(CommentByLineComment)
+nmap <leader>/ <Action>(CommentByLineComment)
