@@ -89,8 +89,8 @@ map <leader>re <Action>(ExpandRegion)
 
 " `g + e(rror)` - Navigate forwards through all issues detected in the current file
 " `g + E(rror)` - Navigate backwards through all issues detected in the current file
-map ge <Action>(ReSharperGotoNextErrorInSolution)
-map gE <Action>(ReSharperGotoPrevErrorInSolution)
+map ge <Action>(GotoNextError)
+map gE <Action>(GotoPrevError)
 
 
 " <g + //> - Find in all files
