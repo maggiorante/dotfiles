@@ -9,8 +9,6 @@ set hlsearch
 set incsearch
 set number
 set autoindent
-set tabstop=4
-set shiftwidth=4
 set expandtab
 set clipboard+=unnamed
 set ttimeout
@@ -23,29 +21,26 @@ let mapleader = " "
 inoremap jk <Esc>
 
 " Unbinds the Space key as it's used as the leader key
-nnoremap <Space> <NOP>
+noremap <Space> <NOP>
 
 " `Esc` - Remove search highlights
-nnoremap <Esc> :nohl<CR>
+nmap <Esc> :nohl<CR>
 
-" `=` - Reformat code in the selected scope
-noremap = :vsc Edit.FormatSelection<CR>
+" `=` - Reformat the whole document
+noremap = :vsc Edit.FormatDocument<CR>
 
 " `<leader> + w(indow) + p(in)` - Toggle the pin status of the document
 " `<leader> + w(indows) + c(lose) + a(ll)` - Close all unpinned documents
 noremap <leader>wp :vsc Window.PinTab<CR>
-noremap <leader>wca :vsc Window.CloseAllButPinned<CR>
+noremap <leader>wc :vsc Window.CloseAllButPinned<CR>
 
-" `<Alt> + k` - Navigate to the next tab
-" `<Alt> + j` - Navigate to the previous tab
-" You might want to change these if you prefer horizontal tabs loayout
-noremap <A-k> :vsc Window.NextTab<CR>
-noremap <A-j> :vsc Window.PreviousTab<CR>
+" `g + t(ab)` - Navigate to the next tab
+" `g + T(ab)` - Navigate to the previous tab
+noremap gt :tabnext<CR>
+noremap gT :tabprevious<CR>
 
-" `<Alt> + <Enter>` - Show action indicators and action list
-" `<Ctrl> + <Space>` - Provide a completion list for partially typed words
-noremap <A-CR> :vsc View.QuickActions<CR>
-noremap <C-Space> :vsc Edit.CompleteWord<CR>
+" `g + .` - Show action indicators and action list
+noremap g. :vsc View.QuickActions<CR>
 
 " `<leader> + r(emove) + s(ort)` - Remove and sort 'usings'
 noremap <leader>rs :vsc Edit.RemoveAndSort<CR>
@@ -55,47 +50,49 @@ noremap <leader>rs :vsc Edit.RemoveAndSort<CR>
 noremap ] :vsc Edit.NextMethod<CR>
 noremap [ :vsc Edit.PreviousMethod<CR>
 
-" `<Ctrl> + h` - Move backward through navigation history
-" `<Ctrl> + l` - Move forward through navigation history
-noremap <C-h> :vsc View.NavigateBackward<CR>
-noremap <C-l> :vsc View.NavigateForward<CR>
+" `g + n(avigate)` - Move backward through navigation history
+" `g + N(avigate)` - Move forward through navigation history
+noremap gn :vsc View.NavigateForward<CR>
+noremap gN :vsc View.NavigateBackward<CR>
 
 " Improves navigation when wrapping
 " by swapping `j` with `gj` and `k` with `gk`
-nnoremap j gj
-nnoremap gj j
-nnoremap k gk
-nnoremap gk k
+noremap j gj
+noremap gj j
+noremap k gk
+noremap gk k
 
 " A declaration introduces an identifier and describes its type, be it a type, object, or function. A declaration is what the compiler needs to accept references to that identifier.
 " A definition actually instantiates/implements this identifier. It's what the linker needs in order to link references to those entities.
 " A definition can be used in the place of a declaration.
 " Not really a difference in Visual Studio.
 
-" `g + D(eclaration)` - Navigate to a declaration of a symbol
-" `g + d(efinition)` - Navigate to a definition of a symbol
-" `g + i(mplementation)` - Navigate to implementation of a type or a type member
-" `g + A(all references)` - Find usages of any symbol from the solution and referenced assemblies
-" `c + d(definition)` - Rename (change definition)
-" `r + c(ollapse)` - Collapse current region
-" `r + e(xpand)` - Expand current region
-nnoremap gD :vsc Edit.GoToDeclaration<CR>
-nnoremap gd :vsc Edit.GoToDefinition<CR>
-nnoremap gi :vsc Edit.GoToImplementation<CR>
-nnoremap gA :vsc Edit.FindAllReferences<CR>
-nnoremap cd :vsc Refactor.Rename<CR>
-nnoremap rc :vsc Edit.CollapseCurrentRegion<CR>
-nnoremap re :vsc Edit.ExpandCurrentRegion<CR>
+" `g(o to) + d(efinition)` - Go to definition
+" `g(o to) + D(eclaration)` - Go to declaration
+" `g(o to) + (t)y(pe definition)` - Go to type definition
+" `g(o to) + i(mplementation)` - Go to implementation
+" `g(o to) + A(all references)` - Go to all references to the current word
+" `c(hange) + d(definition)` - Rename (change definition)
+" `r(egion) + c(ollapse)` - Collapse current region
+" `r(egion) + e(xpand)` - Expand current region
+" `<ctrl-w> + g(o to) + d(efinition)` - Go to definition
+noremap gd :vsc Edit.GoToDefinition<CR>
+noremap gD :vsc Edit.GoToDeclaration<CR>
+noremap gy :vsc Edit.GoToTypeDefinition<CR>
+noremap gi :vsc Edit.GoToImplementation<CR>
+noremap gA :vsc Edit.FindAllReferences<CR>
+noremap cd :vsc Refactor.Rename<CR>
+noremap rc :vsc Edit.CollapseCurrentRegion<CR>
+noremap re :vsc Edit.ExpandCurrentRegion<CR>
+noremap <ctrl-w>gd :vsplit <CR> :vsc Edit.GoToDefinition<CR>
 
-" `g + e(rror)` - Navigate forwards through all issues detected in the current file
-" `g + E(rror)` - Navigate backwards through all issues detected in the current file
-nnoremap ge :vsc View.NextError<CR>
-nnoremap gE :vsc View.PreviousError<CR>
+" `g(o to) + e(rror)` - Go to next error
+" `g(o to) + E(rror)` - Go to previous error
+noremap ge :vsc View.NextError<CR>
+noremap gE :vsc View.PreviousError<CR>
 
-" <g + //> - Find in all files
-" <g + /> - Find in current file
-nnoremap g// :vsc Edit.FindInFiles<CR>
-nnoremap g/ :vsc Edit.Find<CR>
+" `g + /` - Open a project-wide search
+noremap g/ :vsc Edit.FindInFiles<CR>
 
 " `<leader> + b + b(reakpoint)` - Toggle a breakpoint at the current line
 " `<leader> + b(reakpoints) + d(isable)` - Disable all breakpoins
@@ -130,11 +127,11 @@ noremap <leader>sdc :vsc Debug.StopDebugging<CR>
 " `<Ctrl> + <Right>` - Step over
 " `<Ctrl> + <Down>` - Step into
 " `<Ctrl> + <Up>` - Step out
-nnoremap <Leader>qw :vsc Debug.QuickWatch<CR>
-nnoremap <C-Left> :vsc Debug.SetNextStatement<CR>
-nnoremap <C-Right> :vsc Debug.StepOver<CR>
-nnoremap <C-Down> :vsc Debug.StepInto<CR>
-nnoremap <C-Up> :vsc Debug.StepOut<CR>
+noremap <Leader>qw :vsc Debug.QuickWatch<CR>
+noremap <C-Left> :vsc Debug.SetNextStatement<CR>
+noremap <C-Right> :vsc Debug.StepOver<CR>
+noremap <C-Down> :vsc Debug.StepInto<CR>
+noremap <C-Up> :vsc Debug.StepOut<CR>
 
 " `<leader> + /` - Comment/uncomment the current line
-nnoremap <leader>/ :vsc Edit.ToggleLineComment<CR>
+noremap <leader>/ :vsc Edit.ToggleLineComment<CR>
