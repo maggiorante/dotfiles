@@ -36,28 +36,26 @@ nmap = <Action>(ReformatCode)
 nmap <leader>wp <Action>(PinActiveTabToggle)
 nmap <leader>wca <Action>(CloseAllUnpinnedEditors)
 
-" `<Alt> + j` - Navigate to the next tab
-" `<Alt> + k` - Navigate to the previous tab
-nmap <A-k> <Action>(NextTab)
-nmap <A-j> <Action>(PreviousTab)
+" `g + t(ab)` - Navigate to the next tab
+" `g + T(ab)` - Navigate to the previous tab
+nmap gt <Action>(NextTab)
+nmap gT <Action>(PreviousTab)
 
-" `<Alt> + <Enter>` - Show action indicators and action list
-" `<Ctrl> + <Space>` - Provide a completion list for partially typed words
-nmap <A-CR> <Action>(QuickActions)
-nmap <C-Space> <Action>(EditorCompleteStatement)
+" `g + .` - Show action indicators and action list
+nmap g. <Action>(QuickActions)
 
 " `<leader> + r(emove) + s(ort)` - Remove and sort 'usings'
 nmap <leader>rs <Action>(OptimizeImports)
 
 " `]` - Navigate to the next member / type / tag
 " `[` - Navigate to the previous member / type / tag
-nmap [ <Action>(MethodUp)
 nmap ] <Action>(MethodDown)
+nmap [ <Action>(MethodUp)
 
-" `<Ctrl> + h` - Move backward through navigation history
-" `<Ctrl> + l` - Move forward through navigation history
-nmap <C-h> <Action>(Back)
-nmap <C-l> <Action>(Forward)
+" `g + n(avigate)` - Move backward through navigation history
+" `g + N(avigate)` - Move forward through navigation history
+nmap gn <Action>(Forward)
+nmap gN <Action>(Back)
 
 " Improves navigation when wrapping
 " by swapping `j` with `gj` and `k` with `gk`
@@ -71,36 +69,34 @@ nnoremap gk k
 " A definition can be used in the place of a declaration.
 " Not really a difference in Visual Studio.
 
-
-" `g + D(eclaration)` - Navigate to a declaration of a symbol
-" `g + d(efinition)` - Navigate to a definition of a symbol
-" `g + i(mplementation)` - Navigate to implementation of a type or a type member
-" `g + A(all references)` - Find usages of any symbol from the solution and referenced assemblies
-" `c + d(definition)` - Rename (change definition)
-" `r + c(ollapse)` - Collapse current region
-" `r + e(xpand)` - Expand current region
-nmap gD <Action>(GotoTypeDeclaration)
+" `g(o to) + d(efinition)` - Go to definition
+" `g(o to) + D(eclaration)` - Go to declaration
+" `g(o to) + (t)y(pe definition)` - Go to type definition
+" `g(o to) + i(mplementation)` - Go to implementation
+" `g(o to) + A(all references)` - Go to all references to the current word
+" `c(hange) + d(definition)` - Rename (change definition)
+" `r(egion) + c(ollapse)` - Collapse current region
+" `r(egion) + e(xpand)` - Expand current region
+" `<ctrl-w> + g(o to) + d(efinition)` - Go to definition
 nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoDeclarationOnly)
 nmap gi <Action>(GotoImplementation)
-nmap gA <Action>(ShowUsages)
+nmap gy <Action>(GotoTypeDeclaration)
+nmap gA <Action>(FindUsages)
 nmap cd <Action>(RenameElement)
 nmap <leader>rc <Action>(CollapseRegion)
 nmap <leader>re <Action>(ExpandRegion)
+nmap <ctrl-w>gd :vsplit<CR><Action>(GotoDeclaration)
 
-" `g + e(rror)` - Navigate forwards through all issues detected in the current file
-" `g + E(rror)` - Navigate backwards through all issues detected in the current file
+" `g(o to) + e(rror)` - Go to next error
+" `g(o to) + E(rror)` - Go to previous error
 nmap ge <Action>(GotoNextError)
 nmap gE <Action>(GotoPreviousError)
 
-
-" <g + //> - Find in all files
-" <g + /> - Find in current file
-nmap g// <Action>(SearchEverywhere)
-nmap g/ <Action>(Find)
+" `g + /` - Open a project-wide search
+nmap g/ <Action>(SearchEverywhere)
 
 " `<leader> + b + b(reakpoint)` - Toggle a breakpoint at the current line
-" `<leader> + b(reakpoints) + d(isable)` - Disable all breakpoins
-" `<leader> + b(reakpoints) + e(nable)` - Enable all breakpoints
 " `<leader> + b(reakpoints) + r(emove)` - Remove all breakpoints
 " `<leader> + b(reakpoints) + a(ll)` - Show the breakpoints list
 nmap <leader>bb <Action>(ToggleLineBreakpoint)
@@ -109,6 +105,17 @@ nmap <leader>ba <Action>(ViewBreakpoints)
 
 " `<leader> + s(tart) + d(ebug)` - Start with debugging
 nmap <leader>sd <Action>(Debug)
+
+" `<leader> + q(uick) + w(atch)` - Show the QuickWatch dialog box
+" `<Ctrl> + <Left>` - Move execution pointer to the selected statement
+" `<Ctrl> + <Right>` - Step over
+" `<Ctrl> + <Down>` - Step into
+" `<Ctrl> + <Up>` - Step out
+noremap <Leader>qw :vsc Debug.QuickWatch<CR>
+noremap <C-Left> <Action>(SetNextStatement)
+noremap <C-Right> <Action>(StepOver)
+noremap <C-Down> <Action>(StepInto)
+noremap <C-Up> <Action>(StepOut)
 
 " `<leader> + /` - Comment/uncomment the current line
 nmap <leader>/ <Action>(CommentByLineComment)
