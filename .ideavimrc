@@ -106,12 +106,10 @@ nmap <leader>ba <Action>(ViewBreakpoints)
 " `<leader> + s(tart) + d(ebug)` - Start with debugging
 nmap <leader>sd <Action>(Debug)
 
-" `<leader> + q(uick) + w(atch)` - Show the QuickWatch dialog box
 " `<Ctrl> + <Left>` - Move execution pointer to the selected statement
 " `<Ctrl> + <Right>` - Step over
 " `<Ctrl> + <Down>` - Step into
 " `<Ctrl> + <Up>` - Step out
-noremap <Leader>qw :vsc Debug.QuickWatch<CR>
 noremap <C-Left> <Action>(SetNextStatement)
 noremap <C-Right> <Action>(StepOver)
 noremap <C-Down> <Action>(StepInto)
