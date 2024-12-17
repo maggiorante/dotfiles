@@ -42,7 +42,7 @@ nmap gt <Action>(NextTab)
 nmap gT <Action>(PreviousTab)
 
 " `g + .` - Show action indicators and action list
-nmap g. <Action>(QuickActions)
+nmap g. <Action>(ShowIntentionActions)
 
 " `<leader> + r(emove) + s(ort)` - Remove and sort 'usings'
 nmap <leader>rs <Action>(OptimizeImports)
