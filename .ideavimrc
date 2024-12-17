@@ -77,7 +77,6 @@ nnoremap gk k
 " `c(hange) + d(definition)` - Rename (change definition)
 " `r(egion) + c(ollapse)` - Collapse current region
 " `r(egion) + e(xpand)` - Expand current region
-" `<ctrl-w> + g(o to) + d(efinition)` - Go to definition
 nmap gd <Action>(GotoDeclaration)
 nmap gD <Action>(GotoDeclarationOnly)
 nmap gy <Action>(GotoTypeDeclaration)
@@ -88,7 +87,6 @@ nmap rc <Action>(CollapseRegion)
 nmap re <Action>(ExpandRegion)
 nmap rC <Action>(CollapseAllRegions)
 nmap rE <Action>(ExpandAllRegions)
-nmap <ctrl-w>gd :vsplit | <Action>(GotoDeclaration)
 
 " `g(o to) + e(rror)` - Go to next error
 " `g(o to) + E(rror)` - Go to previous error
