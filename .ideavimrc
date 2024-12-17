@@ -88,7 +88,7 @@ nmap rc <Action>(CollapseRegion)
 nmap re <Action>(ExpandRegion)
 nmap rC <Action>(CollapseAllRegions)
 nmap rE <Action>(ExpandAllRegions)
-nmap <ctrl-w>gd :vsplit<CR> <Action>(GotoDeclaration)
+nmap <ctrl-w>gd :vsplit | <Action>(GotoDeclaration)
 
 " `g(o to) + e(rror)` - Go to next error
 " `g(o to) + E(rror)` - Go to previous error
