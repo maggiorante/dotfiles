@@ -75,7 +75,6 @@ noremap gk k
 " `r(egion) + e(xpand)` - Expand current region
 " `r(egion) + c(ollapse)` - Collapse all regions
 " `r(egion) + E(xpand)` - Expand all regions
-" `<ctrl-w> + g(o to) + d(efinition)` - Go to definition
 noremap gd :vsc Edit.GoToDefinition<CR>
 noremap gD :vsc Edit.GoToDeclaration<CR>
 noremap gy :vsc Edit.GoToTypeDefinition<CR>
@@ -86,7 +85,6 @@ noremap rc :vsc Edit.CollapseCurrentRegion<CR>
 noremap re :vsc Edit.ExpandCurrentRegion<CR>
 noremap rC :vsc Edit.CollapseAllOutlining<CR>
 noremap rE :vsc Edit.ExpandAllOutlining<CR>
-noremap <ctrl-w>gd :vsplit | :vsc Edit.GoToDefinition<CR>
 
 " `g(o to) + e(rror)` - Go to next error
 " `g(o to) + E(rror)` - Go to previous error
