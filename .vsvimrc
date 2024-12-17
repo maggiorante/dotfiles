@@ -86,7 +86,7 @@ noremap rc :vsc Edit.CollapseCurrentRegion<CR>
 noremap re :vsc Edit.ExpandCurrentRegion<CR>
 noremap rC :vsc Edit.CollapseAllOutlining<CR>
 noremap rE :vsc Edit.ExpandAllOutlining<CR>
-noremap <ctrl-w>gd :vsplit<CR> :vsc Edit.GoToDefinition<CR>
+noremap <ctrl-w>gd :vsplit | :vsc Edit.GoToDefinition<CR>
 
 " `g(o to) + e(rror)` - Go to next error
 " `g(o to) + E(rror)` - Go to previous error
