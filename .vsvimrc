@@ -48,8 +48,8 @@ noremap <leader>rs :vsc Edit.RemoveAndSort<CR>
 noremap ] :vsc Edit.NextMethod<CR>
 noremap [ :vsc Edit.PreviousMethod<CR>
 
-" `g + n(avigate)` - Move backward through navigation history
-" `g + N(avigate)` - Move forward through navigation history
+" `g + n(avigate)` - Move forward through navigation history
+" `g + N(avigate)` - Move backward through navigation history
 noremap gn :vsc View.NavigateForward<CR>
 noremap gN :vsc View.NavigateBackward<CR>
 
@@ -73,6 +73,8 @@ noremap gk k
 " `c(hange) + d(definition)` - Rename (change definition)
 " `r(egion) + c(ollapse)` - Collapse current region
 " `r(egion) + e(xpand)` - Expand current region
+" `r(egion) + c(ollapse)` - Collapse all regions
+" `r(egion) + E(xpand)` - Expand all regions
 " `<ctrl-w> + g(o to) + d(efinition)` - Go to definition
 noremap gd :vsc Edit.GoToDefinition<CR>
 noremap gD :vsc Edit.GoToDeclaration<CR>
@@ -82,7 +84,9 @@ noremap gA :vsc Edit.FindAllReferences<CR>
 noremap cd :vsc Refactor.Rename<CR>
 noremap rc :vsc Edit.CollapseCurrentRegion<CR>
 noremap re :vsc Edit.ExpandCurrentRegion<CR>
-noremap <ctrl-w>gd :vsplit <CR> :vsc Edit.GoToDefinition<CR>
+noremap rC :vsc Edit.CollapseAllOutlining<CR>
+noremap rE :vsc Edit.ExpandAllOutlining<CR>
+noremap <ctrl-w>gd :vsplit<CR> :vsc Edit.GoToDefinition<CR>
 
 " `g(o to) + e(rror)` - Go to next error
 " `g(o to) + E(rror)` - Go to previous error
