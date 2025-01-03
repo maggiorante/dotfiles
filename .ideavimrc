@@ -42,7 +42,9 @@ nmap gt <Action>(NextTab)
 nmap gT <Action>(PreviousTab)
 
 " `g + .` - Show action indicators and action list
+" `g + h` - Show hover info
 nmap g. <Action>(ShowIntentionActions)
+nmap gh <Action>(ShowHoverInfo)
 
 " `<leader> + r(emove) + s(ort)` - Remove and sort 'usings'
 nmap <leader>rs <Action>(OptimizeImports)
