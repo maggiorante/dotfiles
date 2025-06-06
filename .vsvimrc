@@ -73,7 +73,7 @@ noremap gk k
 " `c(hange) + d(definition)` - Rename (change definition)
 " `r(egion) + c(ollapse)` - Collapse current region
 " `r(egion) + e(xpand)` - Expand current region
-" `r(egion) + c(ollapse)` - Collapse all regions
+" `r(egion) + C(ollapse)` - Collapse all regions
 " `r(egion) + E(xpand)` - Expand all regions
 noremap gd :vsc Edit.GoToDefinition<CR>
 noremap gD :vsc Edit.GoToDeclaration<CR>
