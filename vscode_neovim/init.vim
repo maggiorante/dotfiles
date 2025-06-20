@@ -22,13 +22,13 @@ if exists('g:vscode')
 	let mapleader = "\<space>"
 
 	" Remap jk to `Esc`
-	inoremap jk <Esc>
+	" inoremap jk <Esc>
 
 	" Unbinds the Space key as it's used as the leader key
 	nnoremap <Space> <NOP>
 
 	" `Esc` removes search highlights
-	nmap <Esc> :nohl<CR>
+	nmap <Esc> :noh<CR>
 
 	" `=` - Reformat code in the selected scope
 	nnoremap = <Cmd>lua require('vscode').action('editor.action.formatDocument')<CR>
