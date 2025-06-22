@@ -1,0 +1,126 @@
+set scrolloff=10
+set showmode
+set showcmd
+set visualbell
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set number
+set autoindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set clipboard+=unnamed
+set ttimeout
+set ttimeoutlen=50
+
+" Set the leader key
+let mapleader = " "
+
+" Remap jk to `Esc`
+inoremap jk <Esc>
+
+" Unbinds the Space key as it's used as the leader key
+nnoremap <Space> <NOP>
+
+" `Esc` removes search highlights
+nmap <Esc> :nohl<CR>
+
+" `=` - Reformat code in the selected scope
+nmap = <Action>(ReformatCode)
+
+" `<leader> + w(indow) + p(in)` - Toggle the pin status of the document
+" `<leader> + w(indows) + c(lose) + a(ll)` - Close all unpinned documents
+nmap <leader>wp <Action>(PinActiveTabToggle)
+nmap <leader>wca <Action>(CloseAllUnpinnedEditors)
+
+" `g + t(ab)` - Navigate to the next tab
+" `g + T(ab)` - Navigate to the previous tab
+nmap gt <Action>(NextTab)
+nmap gT <Action>(PreviousTab)
+
+" `g + .` - Show action indicators and action list
+" `g + h` - Show hover info
+nmap g. <Action>(ShowIntentionActions)
+nmap gh <Action>(ShowHoverInfo)
+
+" `<leader> + r(emove) + s(ort)` - Remove and sort 'usings'
+nmap <leader>rs <Action>(OptimizeImports)
+
+" `]` - Navigate to the next member / type / tag
+" `[` - Navigate to the previous member / type / tag
+nmap ] <Action>(MethodDown)
+nmap [ <Action>(MethodUp)
+
+" `g + n(avigate)` - Move forward through navigation history
+" `g + N(avigate)` - Move backward through navigation history
+nmap gn <Action>(Forward)
+nmap gN <Action>(Back)
+
+" Improves navigation when wrapping
+" by swapping `j` with `gj` and `k` with `gk`
+nnoremap j gj
+nnoremap gj j
+nnoremap k gk
+nnoremap gk k
+
+" A declaration introduces an identifier and describes its type, be it a type, object, or function. A declaration is what the compiler needs to accept references to that identifier.
+" A definition actually instantiates/implements this identifier. It's what the linker needs in order to link references to those entities.
+" A definition can be used in the place of a declaration.
+" Not really a difference in Visual Studio.
+
+" `g(o to) + d(efinition)` - Go to definition
+" `g(o to) + D(eclaration)` - Go to declaration
+" `g(o to) + (t)y(pe definition)` - Go to type definition
+" `g(o to) + i(mplementation)` - Go to implementation
+" `g(o to) + A(all references)` - Go to all references to the current word
+" `c(hange) + d(definition)` - Rename (change definition)
+" `r(egion) + c(ollapse)` - Collapse current region
+" `r(egion) + e(xpand)` - Expand current region
+" `r(egion) + C(ollapse)` - Collapse all regions
+" `r(egion) + E(xpand)` - Expand all regions
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoDeclarationOnly)
+nmap gy <Action>(GotoTypeDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gA <Action>(FindUsages)
+nmap cd <Action>(RenameElement)
+nmap rc <Action>(CollapseRegion)
+nmap re <Action>(ExpandRegion)
+nmap rC <Action>(CollapseAllRegions)
+nmap rE <Action>(ExpandAllRegions)
+
+" `g(o to) + e(rror)` - Go to next error
+" `g(o to) + E(rror)` - Go to previous error
+nmap ge <Action>(GotoNextError)
+nmap gE <Action>(GotoPreviousError)
+
+" `g + /` - Open a project-wide search
+nmap g/ <Action>(SearchEverywhere)
+
+" `<leader> + b + b(reakpoint)` - Toggle a breakpoint at the current line
+" `<leader> + b(reakpoints) + r(emove)` - Remove all breakpoints
+" `<leader> + b(reakpoints) + a(ll)` - Show the breakpoints list
+nmap <leader>bb <Action>(ToggleLineBreakpoint)
+nmap <leader>br <Action>(Debugger.RemoveAllBreakpoints)
+nmap <leader>ba <Action>(ViewBreakpoints)
+
+" `<leader> + s(tart) + d(ebug)` - Start with debugging
+" `<leader> + s(tart) + r(un)` - Start without debugging
+" `<leader> + s(tarted) + d(ebug) + c(ancel)` - Stop debugging
+nmap <leader>sd <Action>(Debug)
+nmap <leader>sr <Action>(Run)
+nmap <leader>sdc <Action>(Stop)
+
+" `<Ctrl> + <Left>` - Move execution pointer to the selected statement
+" `<Ctrl> + <Right>` - Step over
+" `<Ctrl> + <Down>` - Step into
+" `<Ctrl> + <Up>` - Step out
+nmap <C-Left> <Action>(SetNextStatement)
+nmap <C-Right> <Action>(StepOver)
+nmap <C-Down> <Action>(StepInto)
+nmap <C-Up> <Action>(StepOut)
+
+" `<leader> + /` - Comment/uncomment the current line
+nmap <leader>/ <Action>(CommentByLineComment)

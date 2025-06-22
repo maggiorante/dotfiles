@@ -3,18 +3,8 @@ local opts = { noremap = true, silent = false }
 local vscode = require("vscode")
 local action = vscode.action
 
--- Set the leader key
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Remap jk to `Esc`
 -- keymap("i", "jk", "<Esc>", { noremap = false, silent = false })
-
--- Unbinds the Space key as it's used as the leader key
-keymap("n", "<Space>", "", opts)
-
--- `Esc` removes search highlights
-keymap("n", "<Esc>", "<Esc>:noh<CR>", opts)
 
 -- `=` - Reformat code in the selected scope
 keymap("n", "=", function() action('editor.action.formatDocument') end, opts)
@@ -44,13 +34,6 @@ keymap("n", "[", function() action('editor.gotoPreviousFold') end, opts)
 -- `g + N(avigate)` - Move backward through navigation history
 keymap("n", "gn", function() action('workbench.action.navigateForward') end, opts)
 keymap("n", "gN", function() action('workbench.action.navigateBack') end, opts)
-
--- Improves navigation when wrapping
--- by swapping `j` with `gj` and `k` with `gk`
-keymap("n", "j", "gj", opts)
-keymap("n", "gj", "j", opts)
-keymap("n", "k", "gk", opts)
-keymap("n", "gk", "k", opts)
 
 -- A declaration introduces an identifier and describes its type, be it a type, object, or function. A declaration is what the compiler needs to accept references to that identifier.
 -- A definition actually instantiates/implements this identifier. It's what the linker needs in order to link references to those entities.
