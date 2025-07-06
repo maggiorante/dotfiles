@@ -3,9 +3,6 @@ local opts = { noremap = true, silent = false }
 local vscode = require("vscode")
 local action = vscode.action
 
--- Remap jk to `Esc`
--- keymap("i", "jk", "<Esc>", { noremap = false, silent = false })
-
 -- `=` - Reformat code in the selected scope
 keymap("n", "=", function() action('editor.action.formatDocument') end, opts)
 
@@ -18,9 +15,6 @@ keymap("n", "<leader>wc", function() action('workbench.action.closeActivePinnedE
 -- `g + T(ab)` - Navigate to the previous tab
 keymap("n", "gt", function() action('workbench.action.nextEditor') end, opts)
 keymap("n", "gT", function() action('workbench.action.previousEditor') end, opts)
-
--- `g + .` - Show action indicators and action list
-keymap("n", "g.", function() action('editor.action.quickFix') end, opts)
 
 -- `<leader> + r(emove) + s(ort)` - Remove and sort 'usings'
 keymap("n", "<leader>rs", function() action('editor.action.organizeImports') end, opts)
@@ -43,9 +37,17 @@ keymap("n", "gN", function() action('workbench.action.navigateBack') end, opts)
 -- `g(o to) + d(efinition)` - Go to definition
 -- `g(o to) + D(eclaration)` - Go to declaration
 -- `g(o to) + (t)y(pe definition)` - Go to type definition
--- `g(o to) + i(mplementation)` - Go to implementation
--- `g(o to) + A(all references)` - Go to all references to the current word
+-- `g(o to) + I(mplementation)` - Go to implementation
 -- `c(hange) + d(definition)` - Rename (change definition)
+-- `g(o to) + A(all references)` - Go to all references to the current word
+-- `g + s` - Find symbol in current file
+-- `g + S` - FInd symbol in entire project
+-- `g + ]` - Go to next diagnostic
+-- `] + d(iagnostic)` - Go to next diagnostic
+-- `g + [` - Go to previous diagnostic
+-- `[ + d(diagnostic)` - Go to previous diagnostic
+-- `g + .` - Show action indicators and action list
+-- `g + h` - Show inline error (hover)
 -- `r(egion) + c(ollapse)` - Collapse current region
 -- `r(egion) + e(xpand)` - Expand current region
 -- `r(egion) + C(ollapse)` - Collapse all regions
@@ -53,18 +55,32 @@ keymap("n", "gN", function() action('workbench.action.navigateBack') end, opts)
 keymap("n", "gd", function() action('editor.action.revealDefinition') end, opts)
 keymap("n", "gD", function() action('editor.action.revealDeclaration') end, opts)
 keymap("n", "gy", function() action('editor.action.goToTypeDefinition') end, opts)
-keymap("n", "gi", function() action('editor.action.goToImplementation') end, opts)
-keymap("n", "gA", function() action('editor.action.goToReferences') end, opts)
+keymap("n", "gI", function() action('editor.action.goToImplementation') end, opts)
 keymap("n", "cd", function() action('editor.action.rename') end, opts)
+keymap("n", "gA", function() action('editor.action.goToReferences') end, opts)
+keymap("n", "gs", function() action('workbench.action.gotoSymbol') end, opts)
+keymap("n", "gS", function() action('workbench.action.showAllSymbols') end, opts)
+keymap("n", "g]", function() action('editor.action.marker.next') end, opts)
+keymap("n", "]d", function() action('editor.action.marker.next') end, opts)
+keymap("n", "g[", function() action('editor.action.marker.prev') end, opts)
+keymap("n", "[d", function() action('editor.action.marker.prev') end, opts)
+keymap("n", "g.", function() action('editor.action.quickFix') end, opts)
+keymap("n", "gh", function() action('editor.action.showHover') end, opts)
 keymap("n", "rc", function() action('editor.fold') end, opts)
 keymap("n", "re", function() action('editor.unfold') end, opts)
 keymap("n", "rC", function() action('editor.foldAll') end, opts)
 keymap("n", "rE", function() action('editor.unfoldAll') end, opts)
 
--- `g(o to) + e(rror)` - Go to next error
--- `g(o to) + E(rror)` - Go to previous error
-keymap("n", "ge", function() action('editor.action.marker.next') end, opts)
-keymap("n", "gE", function() action('editor.action.marker.prev') end, opts)
+-- `<ctrl-w> + g + d` - Go to definition in a split
+-- `<ctrl-w> + g + D` - Go to type definition in a split
+keymap("n", "<ctrl-w>gd", function()
+  vim.cmd('vsplit')
+  action('editor.action.revealDefinition')
+end, opts)
+keymap("n", "<ctrl-w>gD", function()
+  vim.cmd('vsplit')
+  action('editor.action.goToTypeDefinition')
+end, opts)
 
 -- `g + /` - Open a project-wide search
 keymap("n", "g/", function() action('workbench.action.findInFiles') end, opts)
@@ -90,5 +106,5 @@ keymap("n", "<C-Right>", function() action('workbench.action.debug.stepOver') en
 keymap("n", "<C-Down>", function() action('workbench.action.debug.stepInto') end, opts)
 keymap("n", "<C-Up>", function() action('workbench.action.debug.stepOut') end, opts)
 
--- `<leader> + /` - Comment/uncomment the current line
-keymap("n", "<leader>/", function() action('editor.action.commentLine') end, opts)
+-- `g + c` - Comment/uncomment the current line
+keymap("n", "gcc", function() action('editor.action.commentLine') end, opts)
